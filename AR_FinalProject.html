@@ -21,9 +21,41 @@
         .mindar-ui-scanning {
         display: block;
         }
+        
+        #custom-leftbtn {
+        display: none; 
+        position: fixed;
+        bottom: 20px; 
+        left: 35%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 0.5em 1em;
+        font-size: 1.5em;
+        border-radius: 0.3em;
+        z-index: 9999;
+        pointer-events: none;
+        }
+
+        #custom-rightbtn {
+        display: none; 
+        position: fixed;
+        bottom: 20px; 
+        right: 35%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 0.5em 1em;
+        font-size: 1.5em;
+        border-radius: 0.3em;
+        z-index: 9999;
+        pointer-events: none;
+        }
         </style>
     </head>
     <body>
+        <button id="custom-leftbtn"><img src="./UIPhoto/arrow_left.png" alt=""></button>
+        <button id="custom-rightbtn"><img src="./UIPhoto/arrow_right.png" alt=""></button>
         <!--<div id="custom-text">卡皮巴拉其實就是水豚（Capybara）哦</div>-->
         <a-scene
         mindar-image="
@@ -48,11 +80,17 @@
         window.addEventListener("load", () => {
         const targetEl = document.querySelector("#target");
         const jupiterModel = document.querySelector("#jupiterModel");
+        const leftarrowbtn = document.querySelector("#custom-leftbtn");
+        const rightarrowbtn = document.querySelector("#custom-rightbtn");
         targetEl.addEventListener("targetFound", () => {
         jupiterModel.setAttribute("visible",true);
+        leftarrowbtn.style.display = "block";
+        rightarrowbtn.style.display = "block";
         });
         targetEl.addEventListener("targetLost", () => {
         jupiterModel.setAttribute("visible", false);
+        leftarrowbtn.style.display = "none";
+        rightarrowbtn.style.display = "none";
         });
         });
         </script>
