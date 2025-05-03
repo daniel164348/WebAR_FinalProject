@@ -15,9 +15,9 @@
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
         
         <a-entity mindar-image-target="targetIndex: 0" id="jupiter"></a-entity>
-        <!--<a-assets>
-            <a-assets-item id="jupiterModel" src="./jupiter_model/scene.gltf" scale="0.05 0.05 0.05"></a-assets-item>
-        </a-assets>-->
+        <a-assets>
+            <a-assets-item id="jupiterModel" src="./jupiter_model/scene.gltf"></a-assets-item>
+        </a-assets>
         </a-scene>
 
         <script>
@@ -30,8 +30,6 @@
             jupiterEl.addEventListener("targetLost", () => {
                 jupiterModel.setAttribute("visible", false);
             });
-
-            
             });
         </script>
     </body>
