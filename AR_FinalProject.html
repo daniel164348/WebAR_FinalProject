@@ -54,8 +54,8 @@
         </style>
     </head>
     <body>
-        <button id="custom-leftbtn"><img src="./UIPhoto/arrow_left.png" alt=""></button>
-        <button id="custom-rightbtn"><img src="./UIPhoto/arrow_right.png" alt=""></button>
+        <button type="button" id="custom-leftbtn"><img src="./UIPhoto/arrow_left.png" alt=""></button>
+        <button type="button" id="custom-rightbtn"><img src="./UIPhoto/arrow_right.png" alt=""></button>
         <!--<div id="custom-text">卡皮巴拉其實就是水豚（Capybara）哦</div>-->
         <a-scene
         mindar-image="
@@ -89,6 +89,7 @@
         leftarrowbtn.style.display = "block";
         rightarrowbtn.style.display = "block";
         });
+
         targetEl.addEventListener("targetLost", () => {
         jupiterModel.setAttribute("visible", false);
 
@@ -100,12 +101,12 @@
         {
             leftarrowbtn.addEventListener("click", () => {
             var targetModelRotation = jupiterModel.getAttribute("rotation");
-            jupiterModel.setAttribute('rotation',{x: targetModelRotation.x - 1, y: targetModelRotation.y, z: targetModelRotation.z})
+            jupiterModel.setAttribute("rotation",{x: targetModelRotation.x - 1, y: targetModelRotation.y, z: targetModelRotation.z})
         });
 
         rightarrowbtn.addEventListener("click", () => {
             var targetModelRotation = jupiterModel.getAttribute("rotation");
-            jupiterModel.setAttribute('rotation',{x: targetModelRotation.x + 1, y: targetModelRotation.y, z: targetModelRotation.z})
+            jupiterModel.setAttribute("rotation",{x: targetModelRotation.x + 1, y: targetModelRotation.y, z: targetModelRotation.z})
         });
         }
 
