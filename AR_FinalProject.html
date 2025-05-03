@@ -19,7 +19,7 @@
         .mindar-ui-loading,
         .mindar-ui-error,
         .mindar-ui-scanning {
-        display: block;
+        display: none;
         }
         
         #custom-leftbtn {
@@ -34,7 +34,7 @@
         font-size: 1.5em;
         border-radius: 0.3em;
         z-index: 9999;
-        pointer-events: none;
+        pointer-events: auto;
         }
 
         #custom-rightbtn {
@@ -49,7 +49,7 @@
         font-size: 1.5em;
         border-radius: 0.3em;
         z-index: 9999;
-        pointer-events: none;
+        pointer-events: auto;
         }
         </style>
     </head>
@@ -62,9 +62,9 @@
         imageTargetSrc: targets.mind;
         autoStart: true;
         showStats: false;
-        uiLoading: yes;
-        uiScanning: yes;
-        uiError: yes;
+        uiLoading: no;
+        uiScanning: no;
+        uiError: no;
         "
         color-space="sRGB"
         renderer="colorManagement: true, physicallyCorrectLights"
