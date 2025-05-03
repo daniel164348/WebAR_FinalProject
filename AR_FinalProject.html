@@ -94,7 +94,7 @@
         rightarrowbtn.style.display = "none";
         });
 
-        if(leftarrowbtn.style.display == "block")
+        if(leftarrowbtn.style.display === "block")
         {
             leftarrowbtn.addEventListener("click", () => {
             jupiterModel.setAttribute('rotation',{x: targetModelRotation.x - 1, y: targetModelRotation.y, z: targetModelRotation.z})
