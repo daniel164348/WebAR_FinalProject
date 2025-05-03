@@ -52,7 +52,8 @@
         pointer-events: auto;
         }
 
-        img .Btn {
+        img.Btn {
+            -webkit-user-select: none;
             -webkit-touch-callout: none;
             user-select: none;
         }
@@ -155,6 +156,9 @@
             rotateRightBtn.addEventListener(evt, stopRotate);
         }); 
 
+        document.querySelectorAll('img.Btn').forEach(img =>{
+            img.addEventListener('touchstart',e => e.preventDefault());
+        });
 
         });
         </script>
