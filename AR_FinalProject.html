@@ -82,14 +82,16 @@
         const jupiterModel = document.querySelector("#jupiterModel");
         const leftarrowbtn = document.querySelector("#custom-leftbtn");
         const rightarrowbtn = document.querySelector("#custom-rightbtn");
+        
         targetEl.addEventListener("targetFound", () => {
         jupiterModel.setAttribute("visible",true);
-        var targetModelRotation = jupiterModel.getAttribute("rotation");
+        
         leftarrowbtn.style.display = "block";
         rightarrowbtn.style.display = "block";
         });
         targetEl.addEventListener("targetLost", () => {
         jupiterModel.setAttribute("visible", false);
+
         leftarrowbtn.style.display = "none";
         rightarrowbtn.style.display = "none";
         });
@@ -97,10 +99,12 @@
         if(leftarrowbtn.style.display === "block")
         {
             leftarrowbtn.addEventListener("click", () => {
+            var targetModelRotation = jupiterModel.getAttribute("rotation");
             jupiterModel.setAttribute('rotation',{x: targetModelRotation.x - 1, y: targetModelRotation.y, z: targetModelRotation.z})
         });
 
         rightarrowbtn.addEventListener("click", () => {
+            var targetModelRotation = jupiterModel.getAttribute("rotation");
             jupiterModel.setAttribute('rotation',{x: targetModelRotation.x + 1, y: targetModelRotation.y, z: targetModelRotation.z})
         });
         }
