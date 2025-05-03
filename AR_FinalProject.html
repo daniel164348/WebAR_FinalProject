@@ -135,7 +135,7 @@
             jupiterModel.setAttribute('rotate-controller','speed',0);
         }
 
-        ['mousedown','touchstart'].forEach(evt => {
+        ['touchstart'].forEach(evt => {
             rotateLeftBtn.addEventListener(evt, () => { 
             startRotate('left');
             console.log("touch Left");
@@ -145,7 +145,7 @@
             );
         });
 
-        ['mouseup','mouseleave','touchend','touchcancel'].forEach(evt => {
+        ['touchend','touchcancel'].forEach(evt => {
             rotateLeftBtn.addEventListener(evt, stopRotate());
             rotateRightBtn.addEventListener(evt, stopRotate());
         }); 
