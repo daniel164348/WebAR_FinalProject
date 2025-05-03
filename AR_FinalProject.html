@@ -86,29 +86,26 @@
         targetEl.addEventListener("targetFound", () => {
         jupiterModel.setAttribute("visible",true);
         
-        leftarrowbtn.style.display = "block";
-        rightarrowbtn.style.display = "block";
+        leftarrowbtn.disable = true;
+        rightarrowbtn.disable = true;
         });
 
         targetEl.addEventListener("targetLost", () => {
         jupiterModel.setAttribute("visible", false);
 
-        leftarrowbtn.style.display = "none";
-        rightarrowbtn.style.display = "none";
+        leftarrowbtn.disable = false;
+        rightarrowbtn.disable = false;
         });
 
-        if(leftarrowbtn.style.display === "block")
-        {
-            leftarrowbtn.addEventListener("click", () => {
-            var targetModelRotation = jupiterModel.getAttribute("rotation");
-            jupiterModel.setAttribute("rotation",{x: targetModelRotation.x - 1, y: targetModelRotation.y, z: targetModelRotation.z})
+        leftarrowbtn.addEventListener("click", () => {
+        var targetModelRotation = jupiterModel.getAttribute("rotation");
+        jupiterModel.setAttribute("rotation",{x: targetModelRotation.x - 1, y: targetModelRotation.y, z: targetModelRotation.z})
         });
 
         rightarrowbtn.addEventListener("click", () => {
-            var targetModelRotation = jupiterModel.getAttribute("rotation");
-            jupiterModel.setAttribute("rotation",{x: targetModelRotation.x + 1, y: targetModelRotation.y, z: targetModelRotation.z})
+        var targetModelRotation = jupiterModel.getAttribute("rotation");
+        jupiterModel.setAttribute("rotation",{x: targetModelRotation.x + 1, y: targetModelRotation.y, z: targetModelRotation.z})
         });
-        }
 
         });
         </script>
