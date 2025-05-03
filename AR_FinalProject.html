@@ -136,8 +136,13 @@
         }
 
         ['touchstart'].forEach(evt => {
-            rotateLeftBtn.addEventListener(evt, () => startRotate('left'));
-            rotateRightBtn.addEventListener(evt, () => startRotate('right'));
+            rotateLeftBtn.addEventListener(evt, () => { 
+            startRotate('left');
+            console.log("touch Left");
+            });
+            rotateRightBtn.addEventListener(evt, () => 
+            startRotate('right')
+            );
         });
 
         ['touchend','touchcancel'].forEach(evt => {
