@@ -23,7 +23,7 @@
         }
         
         #custom-leftbtn {
-        display: none; 
+        display: block; 
         position: fixed;
         bottom: 20px; 
         left: 25%;
@@ -38,7 +38,7 @@
         }
 
         #custom-rightbtn {
-        display: none; 
+        display: block; 
         position: fixed;
         bottom: 20px; 
         right: 25%;
@@ -86,15 +86,15 @@
         targetEl.addEventListener("targetFound", () => {
         jupiterModel.setAttribute("visible",true);
         
-        leftarrowbtn.disable = true;
-        rightarrowbtn.disable = true;
+        leftarrowbtn.disable = false;
+        rightarrowbtn.disable = false;
         });
 
         targetEl.addEventListener("targetLost", () => {
         jupiterModel.setAttribute("visible", false);
 
-        leftarrowbtn.disable = false;
-        rightarrowbtn.disable = false;
+        leftarrowbtn.disable = true;
+        rightarrowbtn.disable = true;
         });
 
         leftarrowbtn.addEventListener("click", () => {
