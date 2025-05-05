@@ -60,8 +60,8 @@
         </style>
     </head>
     <body>
-        <button type="button" id="custom-leftbtn"><img src="./UIPhoto/arrow_left.png" class="Btn" ></button>
-        <button type="button" id="custom-rightbtn"><img src="./UIPhoto/arrow_right.png" class="Btn" ></button>
+        <button type="button" id="custom-leftbtn"><img src="./UIPhoto/arrow_left.png" class="Btn" disabled></button>
+        <button type="button" id="custom-rightbtn"><img src="./UIPhoto/arrow_right.png" class="Btn" disabled></button>
         <!--AR Scene-->
         <a-scene
         mindar-image="
@@ -87,31 +87,20 @@
         const targetEl = document.querySelector("#target");
         const jupiterModel = document.querySelector("#jupiterModel");
 
-        /*const leftarrowbtn = document.querySelector("#custom-leftbtn");
-        const rightarrowbtn = document.querySelector("#custom-rightbtn");
-
-        var targetModelRotation = jupiterModel.getAttribute("rotation");*/
+        const rotateLeftBtn = document.getElementById('custom-leftbtn');
+        const rotateRightBtn = document.getElementById('custom-rightbtn');
         
         targetEl.addEventListener("targetFound", () => {
         jupiterModel.setAttribute("visible",true);
-        
+        rotateLeftBtn.disabled = false;
+        rotateRightBtn.disabled = false;
         });
 
         targetEl.addEventListener("targetLost", () => {
         jupiterModel.setAttribute("visible", false);
-
+        rotateLeftBtn.disabled = true;
+        rotateRightBtn.disabled = true;
         });
-
-        /*function leftClick()
-        {
-            targetModelRotation = jupiterModel.getAttribute("rotation");
-            jupiterModel.setAttribute("rotation",{x: targetModelRotation.x - 15, y: targetModelRotation.y, z: targetModelRotation.z});
-        }
-        
-        rightarrowbtn.addEventListener("click", () => {
-        targetModelRotation = jupiterModel.getAttribute("rotation");
-        jupiterModel.setAttribute("rotation",{x: targetModelRotation.x + 15, y: targetModelRotation.y, z: targetModelRotation.z})
-        });*/
        
         AFRAME.registerComponent('rotate-controller',{
             schema: {
@@ -128,9 +117,6 @@
 
         jupiterModel.setAttribute('rotate-controller','');
 
-        const rotateLeftBtn = document.getElementById('custom-leftbtn');
-        const rotateRightBtn = document.getElementById('custom-rightbtn');
-
         function startRotate(direction){
             const speed = direction === 'left' ? -30 : 30;
             jupiterModel.setAttribute('rotate-controller','speed',speed);
@@ -144,7 +130,6 @@
         ['touchstart'].forEach(evt => {
             rotateLeftBtn.addEventListener(evt, () => { 
             startRotate('left');
-            console.log("touch Left");
             });
             rotateRightBtn.addEventListener(evt, () => 
             startRotate('right')
