@@ -177,55 +177,93 @@
         });
 
         //A-Frame Component 
-        AFRAME.registerComponent('slide-rotate', {
+        AFRAME.registerComponent('touch-rotation', {
             schema: {
-                enabled:{ type: 'boolean', default: true},
-                speed: {default: 0.5}
+                speedFactor: { default: 0.1 },    // 旋轉速度因子
+                enableXRotation: { default: true }, // 是否啟用X軸旋轉（上下滑動）
+                enableYRotation: { default: true }, // 是否啟用Y軸旋轉（左右滑動）
+                minRotationX: { default: -90 },    // X軸最小旋轉角度（度）
+                maxRotationX: { default: 90 }      // X軸最大旋轉角度（度）
             },
-
-            init()
-            {
-                this.isSliding = false;
-                this.lastX = 0;
-                this.lastY = 0;
-
-                this.onTouchStart = (e) =>{
-                    if(!this.data.enabled) return;
-
-                    this.isSliding = true;
-                    this.lastX = e.touches[0].clientX;
-                    this.lastY = e.touches[0].clientY;
-                };
-
-                this.onTouchMove = (e) => {
-                    if(!this.isSliding || !this.data.enabled) return;
-
-                    const deltaX = e.touches[0].clientX - this.lastX;
-                    const deltaY = e.touches[0].clientY - this.lastY;
-
-                    const rot = this.el.getAttribute('rotation');
-                    rot.y += deltaX * this.data.speed;
-                    rot.x += deltaY * this.data,speed;
-                    this.el.setAttribute("rotation", rot);
-
-                    this.lastX = e.touches[0].clientX;
-                    this.lastY = e.touches[0].clientY;
-                };
-
-                this.onTouchEnd = () => {
-                    this.isSliding = false;
-                };
-
-                window.addEventListener('touchstart',this.onTouchStart);
-                window.addEventListener('touchmove', this.onTouchMove);
-                window.addEventListener('touchend',this.onTouchEnd);
+            
+            init: function() {
+                this.xRotation = 0;
+                this.yRotation = 0;
+                this.touchStartX = 0;
+                this.touchStartY = 0;
+                this.isRotating = false;
+                
+                // 保存模型的初始旋轉
+                const rotation = this.el.object3D.rotation;
+                this.xRotation = THREE.MathUtils.radToDeg(rotation.x);
+                this.yRotation = THREE.MathUtils.radToDeg(rotation.y);
+                
+                // 綁定事件處理函數的上下文
+                this.onTouchStart = this.onTouchStart.bind(this);
+                this.onTouchMove = this.onTouchMove.bind(this);
+                this.onTouchEnd = this.onTouchEnd.bind(this);
+                
+                // 為整個文檔添加觸摸事件監聽器
+                document.addEventListener('touchstart', this.onTouchStart);
+                document.addEventListener('touchmove', this.onTouchMove);
+                document.addEventListener('touchend', this.onTouchEnd);
+                
+                console.log("Touch rotation component initialized");
             },
-
-            remove()
-            {
-                window.removeEventListener('touchstart', this.onTouchStart);
-                window.removeEventListener('touchmove', this.onTouchMove);
-                window.removeEventListener('touchend',this.onTouchEnd);
+            
+            onTouchStart: function(event) {
+                if (event.touches.length === 1) {
+                    this.isRotating = true;
+                    this.touchStartX = event.touches[0].pageX;
+                    this.touchStartY = event.touches[0].pageY;
+                    event.preventDefault();
+                }
+            },
+            
+            onTouchMove: function(event) {
+                if (!this.isRotating || event.touches.length !== 1) return;
+                
+                const touchX = event.touches[0].pageX;
+                const touchY = event.touches[0].pageY;
+                
+                const deltaX = touchX - this.touchStartX;
+                const deltaY = touchY - this.touchStartY;
+                
+                // Y 軸旋轉（左右滑動）
+                if (this.data.enableYRotation) {
+                    this.yRotation += deltaX * this.data.speedFactor;
+                }
+                
+                // X 軸旋轉（上下滑動）
+                if (this.data.enableXRotation) {
+                    const newXRotation = this.xRotation - deltaY * this.data.speedFactor;
+                    // 限制X軸旋轉範圍
+                    this.xRotation = Math.max(this.data.minRotationX, Math.min(this.data.maxRotationX, newXRotation));
+                }
+                
+                // 應用旋轉
+                this.el.object3D.rotation.set(
+                    THREE.MathUtils.degToRad(this.xRotation),
+                    THREE.MathUtils.degToRad(this.yRotation),
+                    0
+                );
+                
+                // 更新觸摸起點
+                this.touchStartX = touchX;
+                this.touchStartY = touchY;
+                
+                event.preventDefault();
+            },
+            
+            onTouchEnd: function() {
+                this.isRotating = false;
+            },
+            
+            remove: function() {
+                // 移除事件監聽器
+                document.removeEventListener('touchstart', this.onTouchStart);
+                document.removeEventListener('touchmove', this.onTouchMove);
+                document.removeEventListener('touchend', this.onTouchEnd);
             }
         });
 
