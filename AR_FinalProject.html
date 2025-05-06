@@ -197,19 +197,6 @@
         */
        
         //A-Frame Component 
-        AFRAME.registerComponent('rotate-controller',{
-            schema: {
-                speed: {type: 'number', default: 0}
-            },
-            tick: function(time, timedelta){
-                if (this.data.speed != 0){
-                    const rotation = this.el.getAttribute('rotation');
-                    rotation.y += this.data.speed * timedelta / 1000;
-                    this.el.setAttribute('rotation', rotation);
-                }
-            }
-        });
-
         AFRAME.registerComponent('slide-rotate', {
             schema: {
                 enabled:{ type: 'boolean', default: true },
