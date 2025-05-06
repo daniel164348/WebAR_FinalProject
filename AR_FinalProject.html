@@ -159,7 +159,7 @@
 
                 if(dataName === "jupiter"){
                     jupiterModel.setAttribute("visible",true);
-                    jupiterModel.setAttribute("slide-rotate", 'enabled', true);
+                    jupiterModel.setAttribute("slide-rotate", "enabled", true);
                 }
 
                 TextBtn.disabled = false;
@@ -169,7 +169,7 @@
             target.addEventListener('targetLost', () =>{
                 //Model hide(*)
                 jupiterModel.setAttribute("visible",false);
-                jupiterModel.setAttribute("slide-rotate", 'enabled', false);
+                jupiterModel.setAttribute("slide-rotate", "enabled", false);
 
                 TextBtn.disabled = false;
                 TextBtn.style.display = "block";
