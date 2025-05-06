@@ -157,24 +157,9 @@
         <div class="overlay" id="info-overlay">
         <div class="overlay-content">
             <div class="close-button" id="close-info">X</div>
-            <div class="overlay-title" id="titleDiv">星球說明視窗</div>
-            <div class="overlay-text" id="description_1">
+            <div class="overlay-title" id="descriptionTitle">星球說明視窗</div>
+            <div class="overlay-text" id="descriptionText">
                 透過掃描圖片後可以在這裡看到該星球相關的文字說明!
-            </div>
-            <div class="overlay-text" id="description_2">
-                
-            </div>
-            <div class="overlay-text" id="description_3">
-                
-            </div>
-            <div class="overlay-text" id="description_4">
-                
-            </div>
-            <div class="overlay-text" id="description_5">
-                
-            </div>
-            <div class="overlay-text" id="description_6">
-                
             </div>
         </div>
     </div>
@@ -260,6 +245,8 @@
 
         // UI Const
         const PlanetTitleText = document.getElementById('custom-Text');
+        const PlanetDescriptionTitle = document.getElementById("descriptionTitle");
+        const PlanetDescriptionText = document.getElementById("descriptionText");
 
         //AR Scanner & ModelSelector
         document.querySelectorAll('.target').forEach(target =>{
@@ -271,18 +258,24 @@
                     jupiterModel.setAttribute("touch-rotation", "enabled", true);
 
                     PlanetTitleText.innerHTML = "木星";
+                    PlanetDescriptionTitle.innerHTML = "木星";
+                    PlanetDescriptionText = "太陽系第五行星<br>有地球1300顆那麼大<br>太陽系最大的行星<br>其實它是一團氣體，人類不能住在上面，會直接掉下去地心探險，然後被壓力壓扁";
                 }
                 if(dataName === "earth"){
                     earthModel.setAttribute("visible",true);
                     earthModel.setAttribute("touch-rotation", "enabled", true);
 
                     PlanetTitleText.innerHTML = "地球";
+                    PlanetDescriptionTitle.innerHTML = "地球";
+                    PlanetDescriptionText = "我們的家，太陽系第三行星<br>唯一有液態水的行星<br><br>我甩掉地球地球甩掉 只要越跳越高"
                 }
                 if(dataName === "mercury"){
                     mercuryModel.setAttribute("visible",true);
                     mercuryModel.setAttribute("touch-rotation", "enabled", true);
 
                     PlanetTitleText.innerHTML = "水星";
+                    PlanetDescriptionTitle.innerHTML = "水星";
+                    PlanetDescriptionText = "太陽系最小行星<br>和太陽貼最近卻沒有大氣層，早上熱到把你蒸發；晚上冷到把你凍成冰塊<br>讓郭頂唱的水星記帶你從音樂體會太陽與水星之間、人與人之間的亦近亦遠的關係"
                 }
                 PlanetTitleText.style.display = "block";
             });
