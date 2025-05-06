@@ -30,7 +30,7 @@
             right: 20px;
             z-index: 10;
             display: flex;
-            flex-direction: column;
+            flex-direction: row; /* 橫向排列按鈕 */
             gap: 15px;
         }
         .ar-button {
@@ -44,20 +44,30 @@
             align-items: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
             transition: transform 0.2s ease;
+            /* 防止長按選單 */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
         .ar-button:hover {
             transform: scale(1.1);
         }
         .info-button {
-            background-color: #2196F3;
+            background-color: rgba(33, 150, 243, 0.8);
         }
         .source-button {
-            background-color: #4CAF50;
+            background-color: rgba(76, 175, 80, 0.8);
         }
-        .button-icon {
-            width: 24px;
-            height: 24px;
-            fill: white;
+        .button-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            pointer-events: none; /* 防止圖片接收事件 */
         }
         .overlay {
             position: fixed;
@@ -130,69 +140,68 @@
 
         <!--UI Button & Text-->
         <div class="button-container">
-            <div class="ar-button info-button" id="info-button">
-                <svg class="button-icon" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-                </svg>
+        <div class="ar-button info-button" id="info-button" ontouchstart="">
+            <!-- 自定義圖片按鈕 - 替換 src 為您的圖片路徑 -->
+            <img class="button-img" src="/api/placeholder/50/50" alt="簡介按鈕" id="info-button-img">
+        </div>
+        <div class="ar-button source-button" id="source-button" ontouchstart="">
+            <!-- 自定義圖片按鈕 - 替換 src 為您的圖片路徑 -->
+            <img class="button-img" src="/api/placeholder/50/50" alt="出處按鈕" id="source-button-img">
+        </div>
+    </div>
+
+    <!-- 簡介說明覆蓋層 -->
+    <div class="overlay" id="info-overlay">
+        <div class="overlay-content">
+            <div class="close-button" id="close-info">X</div>
+            <div class="overlay-title">簡介說明</div>
+            <div class="overlay-text">
+                這是一個基於 A-Frame 的網頁 AR 應用，提供沉浸式的互動體驗。
             </div>
-            <div class="ar-button source-button" id="source-button">
-                <svg class="button-icon" viewBox="0 0 24 24">
-                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
-                </svg>
+            <div class="overlay-text">
+                此應用讓您可以在增強現實環境中與 3D 物體進行互動，創造獨特的視覺體驗。
+            </div>
+            <div class="overlay-text">
+                <strong>主要功能：</strong>
+            </div>
+            <div class="overlay-text">
+                - 在現實環境中放置 3D 模型
+            </div>
+            <div class="overlay-text">
+                - 與虛擬物體互動
+            </div>
+            <div class="overlay-text">
+                - 從不同角度探索 AR 內容
             </div>
         </div>
-    
-        <!-- 簡介說明覆蓋層 -->
-        <div class="overlay" id="info-overlay">
-            <div class="overlay-content">
-                <div class="close-button" id="close-info">X</div>
-                <div class="overlay-title">簡介說明</div>
-                <div class="overlay-text">
-                    這是一個基於 A-Frame 的網頁 AR 應用，提供沉浸式的互動體驗。
-                </div>
-                <div class="overlay-text">
-                    此應用讓您可以在增強現實環境中與 3D 物體進行互動，創造獨特的視覺體驗。
-                </div>
-                <div class="overlay-text">
-                    <strong>主要功能：</strong>
-                </div>
-                <div class="overlay-text">
-                    - 在現實環境中放置 3D 模型
-                </div>
-                <div class="overlay-text">
-                    - 與虛擬物體互動
-                </div>
-                <div class="overlay-text">
-                    - 從不同角度探索 AR 內容
-                </div>
+    </div>
+
+    <!-- 出處說明覆蓋層 -->
+    <div class="overlay" id="source-overlay">
+        <div class="overlay-content">
+            <div class="close-button" id="close-source">X</div>
+            <div class="overlay-title">出處說明</div>
+            <div class="overlay-text">
+                本應用使用的技術與資源：
+            </div>
+            <div class="overlay-text">
+                - A-Frame 框架 (v1.4.2)
+            </div>
+            <div class="overlay-text">
+                - 3D 模型來自 [模型庫名稱]
+            </div>
+            <div class="overlay-text">
+                - 圖標來自 Material Design
+            </div>
+            <div class="overlay-text">
+                開發者: [您的名稱/組織]
+            </div>
+            <div class="overlay-text">
+                版權所有 © 2025
+            </div>
             </div>
         </div>
-    
-        <!-- 出處說明覆蓋層 -->
-        <div class="overlay" id="source-overlay">
-            <div class="overlay-content">
-                <div class="close-button" id="close-source">X</div>
-                <div class="overlay-title">出處說明</div>
-                <div class="overlay-text">
-                    本應用使用的技術與資源：
-                </div>
-                <div class="overlay-text">
-                    - A-Frame 框架 (v1.4.2)
-                </div>
-                <div class="overlay-text">
-                    - 3D 模型來自 [模型庫名稱]
-                </div>
-                <div class="overlay-text">
-                    - 圖標來自 Material Design
-                </div>
-                <div class="overlay-text">
-                    開發者: [您的名稱/組織]
-                </div>
-                <div class="overlay-text">
-                    版權所有 © 2025
-                </div>
-            </div>
-        </div>
+        
         <!--AR Scene -->
 
         <a-scene
@@ -229,15 +238,7 @@
         
         <script>
         window.addEventListener("load", () => {
-        /*function resizeSlideZone(){
-            const slideZone = document.getElementById("slideZone");
-            const screenHeight = window.innerHeight;
-
-            slideZone.style.height = `${screenHeight * 0.2} px`;
-        }
-        //SlideZoneSet&Resize
-        resizeSlideZone();*/
-        
+            
         //Model Const
         const jupiterModel = document.querySelector("#jupiterModel");
 
@@ -391,16 +392,26 @@
         }
         });
 
-        /*document.querySelectorAll('img.Btn').forEach(img =>{
-            img.addEventListener('touchstart',e => e.preventDefault());
-        });*/
-        
+        //Button 
         const infoButton = document.getElementById('info-button');
         const sourceButton = document.getElementById('source-button');
         const infoOverlay = document.getElementById('info-overlay');
         const sourceOverlay = document.getElementById('source-overlay');
         const closeInfo = document.getElementById('close-info');
         const closeSource = document.getElementById('close-source');
+        
+        // 防止長按事件觸發系統選單
+        document.querySelectorAll('.ar-button, .button-img').forEach(el => {
+            el.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            
+            el.addEventListener('touchstart', function(e) {
+                // 防止默認行為，如放大、選擇文本等
+                e.preventDefault();
+            });
+        });
 
         // 顯示簡介說明
         infoButton.addEventListener('click', function() {
