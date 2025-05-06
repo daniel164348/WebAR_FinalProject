@@ -99,7 +99,7 @@
         <!--AR Model (Showing in Scene)-->
 
         <a-entity gltf-model="./jupiter_model/scene.gltf" id="jupiterModel" position="0 0 -30" scale="0.05 0.05 0.05" visible="false"></a-entity>
-        
+
         </a-scene>
         
         <script>
@@ -118,6 +118,10 @@
             const dataName = target.dataset.index;
 
             target.addEventListener('targetFound', () =>{
+                if(dataName === "jupiter"){
+                    jupiterModel.setAttribute("visible",true);
+                }
+                
                 rotateLeftBtn.disabled = false;
                 rotateLeftBtn.style.display = "block";
                 rotateRightBtn.disabled = false;
@@ -125,6 +129,9 @@
             });
 
             target.addEventListener('targetLost', () =>{
+                //Model hide(*)
+                jupiterModel.setAttribute("visible",false);
+
                 rotateLeftBtn.disabled = true;
                 rotateLeftBtn.style.display = "none";
                 rotateRightBtn.disabled = true;
