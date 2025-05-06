@@ -390,7 +390,7 @@
         const closeSource = document.getElementById('close-source');
         
         // 防止長按事件觸發系統選單
-        document.querySelectorAll('.ar-button, .button-img').forEach(el => {
+        /*document.querySelectorAll('.ar-button, .button-img').forEach(el => {
             el.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
                 return false;
@@ -400,7 +400,7 @@
                 // 防止默認行為，如放大、選擇文本等
                 e.preventDefault();
             });
-        });
+        });*/
 
         // 顯示簡介說明
         infoButton.addEventListener('click', function() {
