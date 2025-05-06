@@ -131,20 +131,20 @@
 
         <!--AR Model (Showing in Scene)-->
 
-        <a-entity gltf-model="#jupiterAssetsItem" id="jupiterModel" position="0 0 -30" scale="0.05 0.05 0.05" visible="false" slide-rotate></a-entity>
+        <a-entity gltf-model="#jupiterAssetsItem" id="jupiterModel" position="0 0 -30" scale="0.05 0.05 0.05" visible="false" slide-rotate="enabled = false;"></a-entity>
 
         </a-scene>
         
         <script>
         window.addEventListener("load", () => {
-        function resizeSlideZone(){
+        /*function resizeSlideZone(){
             const slideZone = document.getElementById("slideZone");
             const screenHeight = window.innerHeight;
 
             slideZone.style.height = `${screenHeight * 0.2} px`;
         }
         //SlideZoneSet&Resize
-        resizeSlideZone();
+        resizeSlideZone();*/
         
         //Model Const
         const jupiterModel = document.querySelector("#jupiterModel");
@@ -179,8 +179,8 @@
         //A-Frame Component 
         AFRAME.registerComponent('slide-rotate', {
             schema: {
-                enabled:{ type: 'boolean', default: true },
-                radius: { type: 'number', default: 100 }
+                enabled:{ type: 'boolean', default: true},
+                speed: {default: 0.5}
             },
 
             init()
@@ -192,18 +192,9 @@
                 this.onTouchStart = (e) =>{
                     if(!this.data.enabled) return;
 
-                    const slideZone = document.getElementById("slideZone");
-                    const slideZoneRect = slideZone.getBoundingClientRect();
-
-                    const touchX = e.touches[0].clientX;
-                    const touchY = e.touches[0].clientY;
-
-                    if(touchX >= slideZone.left && touchX <= slideZone.right && touchY >= slideZone.top && touchY <= slideZone.bottom)
-                    {
-                        this.isSliding = true;
-                        this.lastX = touchX;
-                        this.lastY = touchY;
-                    }
+                    this.isSliding = true;
+                    this.lastX = e.touches[0].clientX;
+                    this.lastY = e.touches[0].clientY;
                 };
 
                 this.onTouchMove = (e) => {
@@ -213,8 +204,8 @@
                     const deltaY = e.touches[0].clientY - this.lastY;
 
                     const rot = this.el.getAttribute('rotation');
-                    rot.y += deltaX * 0.2;
-                    rot.x += deltaY * 0.2;
+                    rot.y += deltaX * this.data.speed;
+                    rot.x += deltaY * this.data,speed;
                     this.el.setAttribute("rotation", rot);
 
                     this.lastX = e.touches[0].clientX;
