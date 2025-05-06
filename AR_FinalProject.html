@@ -24,54 +24,97 @@
         
         /*UI Style*/
 
-        #custom-btn {
-        display: none;
-        position: fixed;
-        bottom: 10px; 
-        left: 5%;
-        transform: translateX(-50%);
-        background: rgba(0, 0, 0, 0.6);
-        color: white;
-        padding: 0.5em 1em;
-        font-size: 1.5em;
-        border-radius: 0.3em;
-        z-index: 9999;
-        pointer-events: auto;
-        user-select: none;
-        box-shadow: rgba(0, 0, 0, 0.4);
-        transition: all 0.15s ease;
+        .button-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-
-        /*
-        #custom-rightbtn {
-        display: none; 
-        position: fixed;
-        bottom: 20px; 
-        right: 25%;
-        transform: translateX(50%);
-        background: rgba(0, 0, 0, 0.6);
-        color: white;
-        padding: 0.5em 1em;
-        font-size: 1.5em;
-        border-radius: 0.3em;
-        z-index: 9999;
-        pointer-events: auto;
-        user-select: none;
-        box-shadow: rgba(0, 0, 0, 0.4);
-        transition: all 0.15s ease;
-        }*/
+        .ar-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid white;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .ar-button:hover {
+            transform: scale(1.1);
+        }
+        .info-button {
+            background-color: #2196F3;
+        }
+        .source-button {
+            background-color: #4CAF50;
+        }
+        .button-icon {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 5;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .overlay-content {
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            background-color: rgba(0,0,0,0.85);
+            border-radius: 10px;
+            padding: 20px;
+            color: white;
+            position: relative;
+            overflow-y: auto;
+        }
+        .overlay-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .overlay-text {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #ff5252;
+            border: 2px solid #d32f2f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+        }
 
         #custom-btn:active {
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
             transform: scale(0.95) translateX(-50%);
         }
-
-        /*
-        #custom-rightbtn:active {
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-            transform: scale(0.95) translateX(50%);
-        }
-        */
 
         img.Btn {
             pointer-events: none;
@@ -80,27 +123,76 @@
             user-select: none;
         }
 
-        .slide-zone{
-            position: fixed;
-            bottom: 50px;
-            left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: 9998;
-            pointer-events: auto;
-        }
-
         </style>
     </head>
     <body>
         <!--25.5.6 0.2Ver Single Planets / Slide Rotation-->
-        <!-- UI Scene -->
-        <button type="button" id="custom-btn" disabled><img src="./UIPhoto/info.png" class="Btn"></button>
-        <!--<button type="button" id="custom-leftbtn" disabled><img src="./UIPhoto/arrow_left.png" class="Btn"></button>
-        <button type="button" id="custom-rightbtn" disabled><img src="./UIPhoto/arrow_right.png" class="Btn"></button>-->
 
-        <!--Slide Zone-->
-        <div class="slide-zone" id="slideZone"></div>
+        <!--UI Button & Text-->
+        <div class="button-container">
+            <div class="ar-button info-button" id="info-button">
+                <svg class="button-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                </svg>
+            </div>
+            <div class="ar-button source-button" id="source-button">
+                <svg class="button-icon" viewBox="0 0 24 24">
+                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                </svg>
+            </div>
+        </div>
+    
+        <!-- 簡介說明覆蓋層 -->
+        <div class="overlay" id="info-overlay">
+            <div class="overlay-content">
+                <div class="close-button" id="close-info">X</div>
+                <div class="overlay-title">簡介說明</div>
+                <div class="overlay-text">
+                    這是一個基於 A-Frame 的網頁 AR 應用，提供沉浸式的互動體驗。
+                </div>
+                <div class="overlay-text">
+                    此應用讓您可以在增強現實環境中與 3D 物體進行互動，創造獨特的視覺體驗。
+                </div>
+                <div class="overlay-text">
+                    <strong>主要功能：</strong>
+                </div>
+                <div class="overlay-text">
+                    - 在現實環境中放置 3D 模型
+                </div>
+                <div class="overlay-text">
+                    - 與虛擬物體互動
+                </div>
+                <div class="overlay-text">
+                    - 從不同角度探索 AR 內容
+                </div>
+            </div>
+        </div>
+    
+        <!-- 出處說明覆蓋層 -->
+        <div class="overlay" id="source-overlay">
+            <div class="overlay-content">
+                <div class="close-button" id="close-source">X</div>
+                <div class="overlay-title">出處說明</div>
+                <div class="overlay-text">
+                    本應用使用的技術與資源：
+                </div>
+                <div class="overlay-text">
+                    - A-Frame 框架 (v1.4.2)
+                </div>
+                <div class="overlay-text">
+                    - 3D 模型來自 [模型庫名稱]
+                </div>
+                <div class="overlay-text">
+                    - 圖標來自 Material Design
+                </div>
+                <div class="overlay-text">
+                    開發者: [您的名稱/組織]
+                </div>
+                <div class="overlay-text">
+                    版權所有 © 2025
+                </div>
+            </div>
+        </div>
         <!--AR Scene -->
 
         <a-scene
@@ -297,13 +389,81 @@
             this.el.sceneEl.removeEventListener('targetFound', this.enableTouchRotation);
             this.el.sceneEl.removeEventListener('targetLost', this.disableTouchRotation);
         }
-    });
+        });
 
-        document.querySelectorAll('img.Btn').forEach(img =>{
+        /*document.querySelectorAll('img.Btn').forEach(img =>{
             img.addEventListener('touchstart',e => e.preventDefault());
+        });*/
+        
+        const infoButton = document.getElementById('info-button');
+        const sourceButton = document.getElementById('source-button');
+        const infoOverlay = document.getElementById('info-overlay');
+        const sourceOverlay = document.getElementById('source-overlay');
+        const closeInfo = document.getElementById('close-info');
+        const closeSource = document.getElementById('close-source');
+
+        // 顯示簡介說明
+        infoButton.addEventListener('click', function() {
+            // 關閉出處說明（如果開啟）
+            sourceOverlay.style.display = 'none';
+            sourceOverlay.style.opacity = '0';
+            
+            // 顯示簡介說明
+            infoOverlay.style.display = 'flex';
+            setTimeout(() => {
+                infoOverlay.style.opacity = '1';
+            }, 10);
         });
 
+        // 顯示出處說明
+        sourceButton.addEventListener('click', function() {
+            // 關閉簡介說明（如果開啟）
+            infoOverlay.style.display = 'none';
+            infoOverlay.style.opacity = '0';
+            
+            // 顯示出處說明
+            sourceOverlay.style.display = 'flex';
+            setTimeout(() => {
+                sourceOverlay.style.opacity = '1';
+            }, 10);
         });
+
+        // 關閉簡介說明
+        closeInfo.addEventListener('click', function() {
+            infoOverlay.style.opacity = '0';
+            setTimeout(() => {
+                infoOverlay.style.display = 'none';
+            }, 300);
+        });
+
+        // 關閉出處說明
+        closeSource.addEventListener('click', function() {
+            sourceOverlay.style.opacity = '0';
+            setTimeout(() => {
+                sourceOverlay.style.display = 'none';
+            }, 300);
+        });
+
+        // 點擊覆蓋層背景關閉（但不包括內容區域）
+        infoOverlay.addEventListener('click', function(e) {
+            if (e.target === infoOverlay) {
+                infoOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    infoOverlay.style.display = 'none';
+                }, 300);
+            }
+        });
+
+        sourceOverlay.addEventListener('click', function(e) {
+            if (e.target === sourceOverlay) {
+                sourceOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    sourceOverlay.style.display = 'none';
+                }, 300);
+            }
+        });
+
+    });
 
         </script>
     </body>
