@@ -22,6 +22,8 @@
         display: none;
         }
         
+        /*UI Style*/
+
         #custom-leftbtn {
         display: none;
         position: fixed;
@@ -57,12 +59,17 @@
             -webkit-touch-callout: none;
             user-select: none;
         }
+        
         </style>
     </head>
     <body>
+        <!-- UI Scene -->
+
         <button type="button" id="custom-leftbtn" disabled><img src="./UIPhoto/arrow_left.png" class="Btn"></button>
         <button type="button" id="custom-rightbtn" disabled><img src="./UIPhoto/arrow_right.png" class="Btn"></button>
-        <!--AR Scene-->
+
+        <!--AR Scene -->
+
         <a-scene
         mindar-image="
         imageTargetSrc: targets.mind;
@@ -78,18 +85,55 @@
         device-orientation-permission-ui="enabled: false"
         >
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-        <a-entity gltf-model="./jupiter_model/scene.gltf" id="jupiterModel" position="0 0 -30" scale="0.05 0.05 0.05" visible="false"></a-entity>
-        <a-entity mindar-image-target="targetIndex: 0" id="target"></a-entity>
+
+        <!--Model Assets(PreLoad)-->
+        <a-assets>
+            <a-assets-item id="jupiterAssetsItem" src="./jupiter_model/scene.gltf"></a-assets-item>
+            
+        </a-assets>
+
+        <!--Entity-->
+
+        <!--<a-entity gltf-model="./jupiter_model/scene.gltf" id="jupiterModel" position="0 0 -30" scale="0.05 0.05 0.05" visible="false"></a-entity>-->
+        <a-entity class="target" data-index="jupiter" mindar-image-target="targetIndex: 0">
+            <!--<a-gltf-model src="#jupiterAssetsItem" id="jupiterModel" position="0 0 -30" scale="0.05 0.05 0.05" visible="false"></a-gltf-model>-->
+            <a-gltf-model src="#jupiterAssetsItem" id="jupiterModel" position="0 0 -30" scale="0.05 0.05 0.05"></a-gltf-model>
+        </a-entity>
+
+
         </a-scene>
         
         <script>
         window.addEventListener("load", () => {
-        const targetEl = document.querySelector("#target");
+        /*const targetEl = document.querySelector("#target");*/
+
+        //Model Const
         const jupiterModel = document.querySelector("#jupiterModel");
 
+        // UI Const
         const rotateLeftBtn = document.getElementById('custom-leftbtn');
         const rotateRightBtn = document.getElementById('custom-rightbtn');
-        
+
+        //AR Scanner & ModelSelector
+        document.querySelectorAll('.target').forEach(target =>{
+            const dataName = target.dataset.index;
+
+            target.addEventListener('targetFound', () =>{
+                rotateLeftBtn.disabled = false;
+                rotateLeftBtn.style.display = "block";
+                rotateRightBtn.disabled = false;
+                rotateRightBtn.style.display = "block";
+            });
+
+            target.addEventListener('targetLost', () =>{
+                rotateLeftBtn.disabled = true;
+                rotateLeftBtn.style.display = "none";
+                rotateRightBtn.disabled = true;
+                rotateRightBtn.style.display = "none";
+            });
+        });
+
+        /*
         targetEl.addEventListener("targetFound", () => {
         jupiterModel.setAttribute("visible",true);
 
@@ -106,7 +150,9 @@
         rotateRightBtn.disabled = true;
         rotateRightBtn.style.display = "none";
         });
+        */
        
+        //A-Frame Component 
         AFRAME.registerComponent('rotate-controller',{
             schema: {
                 speed: {type: 'number', default: 0}
@@ -120,8 +166,11 @@
             }
         });
 
+        //Adding Controller Component to Model
         jupiterModel.setAttribute('rotate-controller','');
 
+
+        //Rotate Function 
         function startRotate(direction){
             const speed = direction === 'left' ? -30 : 30;
             jupiterModel.setAttribute('rotate-controller','speed',speed);
@@ -132,6 +181,7 @@
             jupiterModel.setAttribute('rotate-controller','speed',0);
         }
 
+        //UserEvent 
         ['touchstart'].forEach(evt => {
             rotateLeftBtn.addEventListener(evt, () => { 
             startRotate('left');
