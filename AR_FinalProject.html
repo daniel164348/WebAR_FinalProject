@@ -95,7 +95,7 @@
     <body>
         <!--25.5.6 0.2Ver Single Planets / Slide Rotation-->
         <!-- UI Scene -->
-        <button type="button" id="custom-btn" disabled><img src="./UIPhoto/arrow_left.png" class="Btn"></button>
+        <button type="button" id="custom-btn" disabled><img src="./UIPhoto/info.png" class="Btn"></button>
         <!--<button type="button" id="custom-leftbtn" disabled><img src="./UIPhoto/arrow_left.png" class="Btn"></button>
         <button type="button" id="custom-rightbtn" disabled><img src="./UIPhoto/arrow_right.png" class="Btn"></button>-->
 
@@ -144,6 +144,7 @@
         }
 
         window.addEventListener("load", () => {
+
         //SlideZoneSet&Resize
         resizeSlideZone();
         
@@ -177,25 +178,6 @@
             });
         });
 
-        /*
-        targetEl.addEventListener("targetFound", () => {
-        jupiterModel.setAttribute("visible",true);
-
-        rotateLeftBtn.disabled = false;
-        rotateLeftBtn.style.display = "block";
-        rotateRightBtn.disabled = false;
-        rotateRightBtn.style.display = "block";
-        });
-
-        targetEl.addEventListener("targetLost", () => {
-        jupiterModel.setAttribute("visible", false);
-        rotateLeftBtn.disabled = true;
-        rotateLeftBtn.style.display = "none";
-        rotateRightBtn.disabled = true;
-        rotateRightBtn.style.display = "none";
-        });
-        */
-       
         //A-Frame Component 
         AFRAME.registerComponent('slide-rotate', {
             schema: {
