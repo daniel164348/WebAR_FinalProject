@@ -54,6 +54,16 @@
         pointer-events: auto;
         }
 
+        #custom-leftbtn:active {
+            background: rgba(0, 0, 0, 0.85);
+            transform: scale(0.95);
+        }
+
+        #custom-rightbtn:active {
+            background: rgba(0, 0, 0, 0.85);
+            transform: scale(0.95);
+        }
+
         img.Btn {
             -webkit-user-select: none;
             -webkit-touch-callout: none;
@@ -117,7 +127,7 @@
         document.querySelectorAll('.target').forEach(target =>{
             target.addEventListener('targetFound', () =>{
                 const dataName = target.dataset.index;
-                
+
                 if(dataName === "jupiter"){
                     jupiterModel.setAttribute("visible",true);
                 }
