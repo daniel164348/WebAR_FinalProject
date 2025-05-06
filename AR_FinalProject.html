@@ -238,12 +238,15 @@
         </a-assets>
 
         <!--AR Scan Entity-->
-
+        <a-entity class="target" data-index="earth" mindar-image-target="targetIndex: 1"></a-entity>
         <a-entity class="target" data-index="jupiter" mindar-image-target="targetIndex: 2"></a-entity>
+        <a-entity class="target" data-index="mercury" mindar-image-target="targetIndex: 3"></a-entity>
 
         <!--AR Model (Showing in Scene)-->
 
+        <a-entity gltf-model="#earthAssetsItem" id="earthModel" position="0 0 -30" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
         <a-entity gltf-model="#jupiterAssetsItem" id="jupiterModel" position="0 0 -30" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#mercuryAssetsItem" id="mercuryModel" position="0 0 -30" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
 
         </a-scene>
         
@@ -252,6 +255,8 @@
             
         //Model Const
         const jupiterModel = document.querySelector("#jupiterModel");
+        const earthModel = document.querySelector("#earthModel");
+        const mercuryModel = document.querySelector("#mercuryModel");
 
         // UI Const
         const PlanetTitleText = document.getElementById('custom-Text');
@@ -267,14 +272,30 @@
 
                     PlanetTitleText.innerHTML = "木星";
                 }
+                if(dataName === "earth"){
+                    earthModel.setAttribute("visible",true);
+                    earthModel.setAttribute("touch-rotation", "enabled", true);
 
+                    PlanetTitleText.innerHTML = "地球";
+                }
+                if(dataName === "mercury"){
+                    mercuryModel.setAttribute("visible",true);
+                    mercuryModel.setAttribute("touch-rotation", "enabled", true);
+
+                    PlanetTitleText.innerHTML = "水星";
+                }
                 PlanetTitleText.style.display = "block";
             });
 
             target.addEventListener('targetLost', () =>{
                 //Model hide(*)
                 jupiterModel.setAttribute("visible",false);
+                earthModel.setAttribute("visible",false);
+                mercuryModel.setAttribute("visible",false);
+
                 jupiterModel.setAttribute("touch-rotation", "enabled", false);
+                earthModel.setAttribute("touch-rotation", "enabled", false);
+                mercuryModel.setAttribute("touch-rotation", "enabled", false);
 
                 PlanetTitleText.style.display = "none";
             });
