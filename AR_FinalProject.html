@@ -151,8 +151,7 @@
         const jupiterModel = document.querySelector("#jupiterModel");
 
         // UI Const
-        const rotateLeftBtn = document.getElementById('custom-leftbtn');
-        const rotateRightBtn = document.getElementById('custom-rightbtn');
+        const TextBtn = document.getElementById('custom-btn');
 
         //AR Scanner & ModelSelector
         document.querySelectorAll('.target').forEach(target =>{
@@ -166,18 +165,15 @@
 
                 TextBtn.disabled = false;
                 TextBtn.style.display = "block";
-                rotateRightBtn.disabled = false;
-                rotateRightBtn.style.display = "block";
             });
 
             target.addEventListener('targetLost', () =>{
                 //Model hide(*)
                 jupiterModel.setAttribute("visible",false);
+                jupiterModel.setAttribute("slide-rotate", 'enabled', true);
 
-                rotateLeftBtn.disabled = true;
-                rotateLeftBtn.style.display = "none";
-                rotateRightBtn.disabled = true;
-                rotateRightBtn.style.display = "none";
+                TextBtn.disabled = false;
+                TextBtn.style.display = "block";
             });
         });
 
@@ -275,42 +271,6 @@
             }
         });
 
-        //Rotate Function (x)
-        function startRotate(direction){
-            const speed = direction === 'left' ? -30 : 30;
-            jupiterModel.setAttribute('rotate-controller','speed',speed);
-        }
-
-        function stopRotate()
-        {
-            jupiterModel.setAttribute('rotate-controller','speed',0);
-        }
-
-        //UserEvent (x)
-        /*
-        ['touchstart'].forEach(evt => {
-            rotateLeftBtn.addEventListener(evt, () => { 
-                startRotate('left');
-                rotateLeftBtn.classList.add("active");
-            });
-            rotateRightBtn.addEventListener(evt, () =>{
-                startRotate('right');
-                rotateRightBtn.classList.add("active");
-            });
-        });
-
-        ['touchend','touchcancel'].forEach(evt => {
-            rotateLeftBtn.addEventListener(evt, () => {
-                stopRotate();
-                rotateLeftBtn.classList.remove("active");
-            });
-            rotateRightBtn.addEventListener(evt, () => {
-                stopRotate();
-                rotateRightBtn.classList.remove("active");
-            });
-        }); 
-        */
-        
         document.querySelectorAll('img.Btn').forEach(img =>{
             img.addEventListener('touchstart',e => e.preventDefault());
         });
