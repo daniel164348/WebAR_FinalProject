@@ -237,6 +237,11 @@
         <a-entity gltf-model="#earthAssetsItem" id="earthModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
         <a-entity gltf-model="#jupiterAssetsItem" id="jupiterModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
         <a-entity gltf-model="#mercuryAssetsItem" id="mercuryModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#moonAssetsItem" id="moonModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#neptuneAssetsItem" id="neptuneModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#saturnAssetsItem" id="saturnModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#unanusAssetsItem" id="unanusModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#venusAssetsItem" id="venusModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
 
         </a-scene>
         
@@ -247,6 +252,11 @@
         const jupiterModel = document.querySelector("#jupiterModel");
         const earthModel = document.querySelector("#earthModel");
         const mercuryModel = document.querySelector("#mercuryModel");
+        const moonModel = document.querySelector("#moonModel");
+        const neptuneModel = document.querySelector("#neptuneModel");
+        const saturnModel = document.querySelector("#saturnModel");
+        const unanusModel = document.querySelector("#unanusModel");
+        const venusModel = document.querySelector("#venusModel");
 
         // UI Const
         const PlanetTitleText = document.getElementById('custom-Text');
@@ -281,6 +291,38 @@
                     PlanetTitleText.innerHTML = "水星";
                     PlanetDescriptionTitle.innerHTML = "水星";
                     PlanetDescriptionText.innerHTML = "太陽系最小行星<br>和太陽貼最近卻沒有大氣層，早上熱到把你蒸發；晚上冷到把你凍成冰塊<br>讓郭頂唱的水星記帶你從音樂體會太陽與水星之間、人與人之間的亦近亦遠的關係";
+                }
+                if(dataName === "moon"){
+                    moonModel.setAttribute("visible",true);
+                    moonModel.setAttribute("touch-rotation", "enabled", true);
+
+                    PlanetTitleText.innerHTML = "月亮";
+                    PlanetDescriptionTitle.innerHTML = "月亮";
+                    PlanetDescriptionText.innerHTML = "我們的鄰居<br>你常常能聽到有關於它的各種小故事與奇妙現象<br>中秋一家烤肉萬家香，人們都喜歡邊吃肉邊盯著它";
+                }
+                if(dataName === "neptune"){
+                    neptuneModel.setAttribute("visible",true);
+                    neptuneModel.setAttribute("touch-rotation", "enabled", true);
+
+                    PlanetTitleText.innerHTML = "海王星";
+                    PlanetDescriptionTitle.innerHTML = "海王星";
+                    PlanetDescriptionText.innerHTML = "由氫、氦等物質組成，星球表面顏色是因為甲烷這類氫化物吸收紅光變成的<br>據說據說海綿寶寶裡海神王的名字從它而來";
+                }
+                if(dataName === "saturn"){
+                    saturnModel.setAttribute("visible",true);
+                    saturnModel.setAttribute("touch-rotation", "enabled", true);
+
+                    PlanetTitleText.innerHTML = "土星";
+                    PlanetDescriptionTitle.innerHTML = "土星";
+                    PlanetDescriptionText.innerHTML = "太陽系八大中第六行星<br>整顆都是氣體，可是有很漂亮的呼拉圈(土星環)";
+                }
+                if(dataName === "venus"){
+                    venusModel.setAttribute("visible",true);
+                    venusModel.setAttribute("touch-rotation", "enabled", true);
+
+                    PlanetTitleText.innerHTML = "金星";
+                    PlanetDescriptionTitle.innerHTML = "金星";
+                    PlanetDescriptionText.innerHTML = "太陽系第二靠近太陽的行星<br>名字源於羅馬與希臘神話中愛與美的女神，可是整顆星球卻熱到你無法靠近(462度)<br>眼冒金星";
                 }
                 
                 PlanetTitleText.style.display = "block";
