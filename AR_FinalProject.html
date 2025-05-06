@@ -59,7 +59,7 @@
             -webkit-touch-callout: none;
             user-select: none;
         }
-        
+
         </style>
     </head>
     <body>
@@ -92,15 +92,14 @@
             
         </a-assets>
 
-        <!--Entity-->
+        <!--AR Scan Entity-->
 
-        <!--<a-entity gltf-model="./jupiter_model/scene.gltf" id="jupiterModel" position="0 0 -30" scale="0.05 0.05 0.05" visible="false"></a-entity>-->
-        <a-entity class="target" data-index="jupiter" mindar-image-target="targetIndex: 0">
-            <!--<a-gltf-model src="#jupiterAssetsItem" id="jupiterModel" position="0 0 -30" scale="0.05 0.05 0.05" visible="false"></a-gltf-model>-->
-            <a-gltf-model src="#jupiterAssetsItem" id="jupiterModel" position="0 0 -30" scale="0.05 0.05 0.05"></a-gltf-model>
-        </a-entity>
+        <a-entity class="target" data-index="jupiter" mindar-image-target="targetIndex: 0"></a-entity>
 
+        <!--AR Model (Showing in Scene)-->
 
+        <a-entity gltf-model="./jupiter_model/scene.gltf" id="jupiterModel" position="0 0 -30" scale="0.05 0.05 0.05" visible="false"></a-entity>
+        
         </a-scene>
         
         <script>
