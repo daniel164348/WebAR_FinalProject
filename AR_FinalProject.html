@@ -100,7 +100,7 @@
         <button type="button" id="custom-rightbtn" disabled><img src="./UIPhoto/arrow_right.png" class="Btn"></button>-->
 
         <!--Slide Zone-->
-        <div class="slide-zone"></div>
+        <div class="slide-zone" id="slideZone"></div>
         <!--AR Scene -->
 
         <a-scene
@@ -138,7 +138,7 @@
         <script>
         window.addEventListener("load", () => {
         function resizeSlideZone(){
-            const slideZone = document.getElementById("slide-zone");
+            const slideZone = document.getElementById("slideZone");
             const screenHeight = window.innerHeight;
 
             slideZone.style.height = `${screenHeight * 0.2} px`;
@@ -192,7 +192,7 @@
                 this.onTouchStart = (e) =>{
                     if(!this.data.enabled) return;
 
-                    const slideZone = document.getElementById("slide-zone");
+                    const slideZone = document.getElementById("slideZone");
                     const slideZoneRect = slideZone.getBoundingClientRect();
 
                     const touchX = e.touches[0].clientX;
@@ -243,7 +243,7 @@
         });
 
         });
-        
+
         </script>
     </body>
 </html>
