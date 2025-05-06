@@ -45,14 +45,13 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
             transition: transform 0.2s ease;
             /* 防止長按選單 */
-            /*-webkit-touch-callout: none;
+            -webkit-touch-callout: none;
             -webkit-user-select: none;
             -khtml-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
-            */
         }
         .ar-button:hover {
             transform: scale(1.1);
@@ -122,28 +121,43 @@
             color: white;
         }
 
+        #custom-Text{
+            display: none;
+            position: fixed;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0,0,0.6);
+            color: white;
+            padding: 0.5em 1em;
+            font-size: 1.5em;
+            border-radius: 0.3em;
+            z-index: 5;
+            pointer-events: none;
+        }
+
         </style>
     </head>
     <body>
         <!--25.5.6 0.9Ver Single Planets / Slide Rotation-->
 
         <!--UI Button & Text-->
+        <div id="custom-Text">
+            木星
+        </div>
         <div class="button-container">
         <div class="ar-button info-button" id="info-button" ontouchstart="">
-            <!-- 自定義圖片按鈕 - 替換 src 為您的圖片路徑 -->
             <img class="button-img" src="./UIPhoto/help.png" id="info-button-img">
         </div>
         <div class="ar-button source-button" id="source-button" ontouchstart="">
-            <!-- 自定義圖片按鈕 - 替換 src 為您的圖片路徑 -->
             <img class="button-img" src="./UIPhoto/info.png" id="source-button-img">
         </div>
     </div>
 
-    <!-- 簡介說明覆蓋層 -->
-    <div class="overlay" id="info-overlay">
+        <div class="overlay" id="info-overlay">
         <div class="overlay-content">
             <div class="close-button" id="close-info">X</div>
-            <div class="overlay-title">簡介說明</div>
+            <div class="overlay-title" id="titleDiv">簡介說明</div>
             <div class="overlay-text">
                 這是一個基於 A-Frame 的網頁 AR 應用，提供沉浸式的互動體驗。
             </div>
@@ -232,7 +246,7 @@
         const jupiterModel = document.querySelector("#jupiterModel");
 
         // UI Const
-        const TextBtn = document.getElementById('custom-btn');
+        const PlanetTitleText = document.getElementById('custom-Text');
 
         //AR Scanner & ModelSelector
         document.querySelectorAll('.target').forEach(target =>{
@@ -242,10 +256,11 @@
                 if(dataName === "jupiter"){
                     jupiterModel.setAttribute("visible",true);
                     jupiterModel.setAttribute("touch-rotation", "enabled", true);
+
+                    PlanetTitleText.innerHTML = "木星";
                 }
 
-                TextBtn.disabled = false;
-                TextBtn.style.display = "block";
+                PlanetTitleText.style.display = "block";
             });
 
             target.addEventListener('targetLost', () =>{
@@ -253,8 +268,7 @@
                 jupiterModel.setAttribute("visible",false);
                 jupiterModel.setAttribute("touch-rotation", "enabled", false);
 
-                TextBtn.disabled = false;
-                TextBtn.style.display = "block";
+                PlanetTitleText.style.display = "none";
             });
         });
 
@@ -388,47 +402,27 @@
         const sourceOverlay = document.getElementById('source-overlay');
         const closeInfo = document.getElementById('close-info');
         const closeSource = document.getElementById('close-source');
-        
-        // 防止長按事件觸發系統選單
-        /*document.querySelectorAll('.ar-button, .button-img').forEach(el => {
-            el.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                return false;
-            });
-            
-            el.addEventListener('touchstart', function(e) {
-                // 防止默認行為，如放大、選擇文本等
-                e.preventDefault();
-            });
-        });*/
 
-        // 顯示簡介說明
         infoButton.addEventListener('click', function() {
-            // 關閉出處說明（如果開啟）
             sourceOverlay.style.display = 'none';
             sourceOverlay.style.opacity = '0';
             
-            // 顯示簡介說明
             infoOverlay.style.display = 'flex';
             setTimeout(() => {
                 infoOverlay.style.opacity = '1';
             }, 10);
         });
 
-        // 顯示出處說明
         sourceButton.addEventListener('click', function() {
-            // 關閉簡介說明（如果開啟）
             infoOverlay.style.display = 'none';
             infoOverlay.style.opacity = '0';
             
-            // 顯示出處說明
             sourceOverlay.style.display = 'flex';
             setTimeout(() => {
                 sourceOverlay.style.opacity = '1';
             }, 10);
         });
 
-        // 關閉簡介說明
         closeInfo.addEventListener('click', function() {
             infoOverlay.style.opacity = '0';
             setTimeout(() => {
@@ -436,7 +430,6 @@
             }, 300);
         });
 
-        // 關閉出處說明
         closeSource.addEventListener('click', function() {
             sourceOverlay.style.opacity = '0';
             setTimeout(() => {
@@ -444,7 +437,6 @@
             }, 300);
         });
 
-        // 點擊覆蓋層背景關閉（但不包括內容區域）
         infoOverlay.addEventListener('click', function(e) {
             if (e.target === infoOverlay) {
                 infoOverlay.style.opacity = '0';
