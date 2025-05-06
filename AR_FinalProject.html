@@ -259,7 +259,7 @@
 
                     PlanetTitleText.innerHTML = "木星";
                     PlanetDescriptionTitle.innerHTML = "木星";
-                    PlanetDescriptionText = "太陽系第五行星<br>有地球1300顆那麼大<br>太陽系最大的行星<br>其實它是一團氣體，人類不能住在上面，會直接掉下去地心探險，然後被壓力壓扁";
+                    PlanetDescriptionText.innerHTML = "太陽系第五行星<br>有地球1300顆那麼大<br>太陽系最大的行星<br>其實它是一團氣體，人類不能住在上面，會直接掉下去地心探險，然後被壓力壓扁";
                 }
                 if(dataName === "earth"){
                     earthModel.setAttribute("visible",true);
@@ -267,7 +267,7 @@
 
                     PlanetTitleText.innerHTML = "地球";
                     PlanetDescriptionTitle.innerHTML = "地球";
-                    PlanetDescriptionText = "我們的家，太陽系第三行星<br>唯一有液態水的行星<br><br>我甩掉地球地球甩掉 只要越跳越高"
+                    PlanetDescriptionText.innerHTML = "我們的家，太陽系第三行星<br>唯一有液態水的行星<br><br>我甩掉地球地球甩掉 只要越跳越高";
                 }
                 if(dataName === "mercury"){
                     mercuryModel.setAttribute("visible",true);
@@ -275,8 +275,9 @@
 
                     PlanetTitleText.innerHTML = "水星";
                     PlanetDescriptionTitle.innerHTML = "水星";
-                    PlanetDescriptionText = "太陽系最小行星<br>和太陽貼最近卻沒有大氣層，早上熱到把你蒸發；晚上冷到把你凍成冰塊<br>讓郭頂唱的水星記帶你從音樂體會太陽與水星之間、人與人之間的亦近亦遠的關係"
+                    PlanetDescriptionText.innerHTML = "太陽系最小行星<br>和太陽貼最近卻沒有大氣層，早上熱到把你蒸發；晚上冷到把你凍成冰塊<br>讓郭頂唱的水星記帶你從音樂體會太陽與水星之間、人與人之間的亦近亦遠的關係";
                 }
+                
                 PlanetTitleText.style.display = "block";
             });
 
