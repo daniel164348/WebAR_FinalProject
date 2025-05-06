@@ -136,15 +136,13 @@
         </a-scene>
         
         <script>
+        window.addEventListener("load", () => {
         function resizeSlideZone(){
             const slideZone = document.getElementById("slide-zone");
             const screenHeight = window.innerHeight;
 
             slideZone.style.height = `${screenHeight * 0.2} px`;
         }
-
-        window.addEventListener("load", () => {
-
         //SlideZoneSet&Resize
         resizeSlideZone();
         
@@ -245,8 +243,7 @@
         });
 
         });
-
-        window.addEventListener('resize', resizeSlideZone);
+        
         </script>
     </body>
 </html>
