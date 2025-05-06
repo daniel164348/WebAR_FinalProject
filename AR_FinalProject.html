@@ -37,6 +37,9 @@
         border-radius: 0.3em;
         z-index: 9999;
         pointer-events: auto;
+        user-select: none;
+        box-shadow: rgba(0, 0, 0, 0.4);
+        transition: all 0.15s ease;
         }
 
         #custom-rightbtn {
@@ -52,16 +55,19 @@
         border-radius: 0.3em;
         z-index: 9999;
         pointer-events: auto;
+        user-select: none;
+        box-shadow: rgba(0, 0, 0, 0.4);
+        transition: all 0.15s ease;
         }
 
         #custom-leftbtn:active {
-            background: rgba(0, 0, 0, 0.85);
-            transform: scale(0.95);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+            transform: scale(0.95) translateX(-50%);
         }
 
         #custom-rightbtn:active {
-            background: rgba(0, 0, 0, 0.85);
-            transform: scale(0.95);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+            transform: scale(0.95) translateX(50%);
         }
 
         img.Btn {
@@ -200,16 +206,24 @@
         //UserEvent 
         ['touchstart'].forEach(evt => {
             rotateLeftBtn.addEventListener(evt, () => { 
-            startRotate('left');
+                startRotate('left');
+                rotateLeftBtn.classList.add("active");
             });
-            rotateRightBtn.addEventListener(evt, () => 
-            startRotate('right')
-            );
+            rotateRightBtn.addEventListener(evt, () =>{
+                startRotate('right');
+                rotateRightBtn.classList.add("active");
+            });
         });
 
         ['touchend','touchcancel'].forEach(evt => {
-            rotateLeftBtn.addEventListener(evt, stopRotate);
-            rotateRightBtn.addEventListener(evt, stopRotate);
+            rotateLeftBtn.addEventListener(evt, () => {
+                stopRotate();
+                rotateLeftBtn.classList.remove("active");
+            });
+            rotateRightBtn.addEventListener(evt, () => {
+                stopRotate();
+                rotateRightBtn.classList.remove("active");
+            });
         }); 
 
         document.querySelectorAll('img.Btn').forEach(img =>{
