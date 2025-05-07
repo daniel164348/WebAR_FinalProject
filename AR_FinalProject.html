@@ -234,14 +234,14 @@
 
         <!--AR Model (Showing in Scene)-->
 
-        <a-entity gltf-model="#earthAssetsItem" id="earthModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
-        <a-entity gltf-model="#jupiterAssetsItem" id="jupiterModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
-        <a-entity gltf-model="#mercuryAssetsItem" id="mercuryModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#earthAssetsItem" id="earthModel" position="0 0 -25" scale="0.2 0.2 0.2" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#jupiterAssetsItem" id="jupiterModel" position="0 0 -25" scale="0.025 0.025 0.025" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#mercuryAssetsItem" id="mercuryModel" position="0 0 -25" scale="0.4 0.4 0.4" visible="false" touch-rotation></a-entity>
         <a-entity gltf-model="#moonAssetsItem" id="moonModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
         <a-entity gltf-model="#neptuneAssetsItem" id="neptuneModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
         <a-entity gltf-model="#saturnAssetsItem" id="saturnModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
-        <a-entity gltf-model="#unanusAssetsItem" id="unanusModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
-        <a-entity gltf-model="#venusAssetsItem" id="venusModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#unanusAssetsItem" id="unanusModel" position="0 0 -25" scale="0.1 0.1 0.1" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#venusAssetsItem" id="venusModel" position="0 0 -25" scale="0.3 0.3 0.3" visible="false" touch-rotation></a-entity>
 
         </a-scene>
         
@@ -314,7 +314,15 @@
 
                     PlanetTitleText.innerHTML = "土星";
                     PlanetDescriptionTitle.innerHTML = "土星";
-                    PlanetDescriptionText.innerHTML = "太陽系八大中第六行星<br>整顆都是氣體，可是有很漂亮的呼拉圈(土星環)";
+                    PlanetDescriptionText.innerHTML = "太陽系第六行星<br>整顆都是氣體，可是有很漂亮的呼拉圈(土星環)";
+                }
+                if(dataName === "unanus"){
+                    unanusModel.setAttribute("visible",true);
+                    unanusModel.setAttribute("touch-rotation", "enabled", true);
+
+                    PlanetTitleText.innerHTML = "海王星";
+                    PlanetDescriptionTitle.innerHTML = "海王星";
+                    PlanetDescriptionText.innerHTML = "太陽系第七行星<br>離太陽超遠，看起來很冰實際上確實很冰<br>叛逆的它是唯一一顆躺著公轉的星球";
                 }
                 if(dataName === "venus"){
                     venusModel.setAttribute("visible",true);
@@ -333,10 +341,20 @@
                 jupiterModel.setAttribute("visible",false);
                 earthModel.setAttribute("visible",false);
                 mercuryModel.setAttribute("visible",false);
+                moonModel.setAttribute("visible",false);
+                neptuneModel.setAttribute("visible",false);
+                saturnModel.setAttribute("visible",false);
+                unanusModel.setAttribute("visible",false);
+                venusModel.setAttribute("visible",false);
 
                 jupiterModel.setAttribute("touch-rotation", "enabled", false);
                 earthModel.setAttribute("touch-rotation", "enabled", false);
                 mercuryModel.setAttribute("touch-rotation", "enabled", false);
+                moonModel.setAttribute("touch-rotation", "enabled", false);
+                neptuneModel.setAttribute("touch-rotation", "enabled", false);
+                saturnModel.setAttribute("touch-rotation", "enabled", false);
+                unanusModel.setAttribute("touch-rotation", "enabled", false);
+                venusModel.setAttribute("touch-rotation", "enabled", false);
 
                 PlanetTitleText.style.display = "none";
             });
