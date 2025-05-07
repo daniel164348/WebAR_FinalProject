@@ -16,11 +16,12 @@
         position: fixed; top: 0; left: 0;
         }
         /* 隱藏所有 MindAR 預設 UI */
-        .mindar-ui-loading,
+        /*.mindar-ui-loading,*/
         .mindar-ui-error,
         .mindar-ui-scanning {
         display: none;
         }
+
         
         /*UI Style*/
 
@@ -197,7 +198,7 @@
         imageTargetSrc: targets.mind;
         autoStart: true;
         showStats: false;
-        uiLoading: no;
+        uiLoading: yes;
         uiScanning: no;
         uiError: no;
         "
@@ -234,14 +235,14 @@
 
         <!--AR Model (Showing in Scene)-->
 
-        <a-entity gltf-model="#earthAssetsItem" id="earthModel" position="0 0 -25" scale="0.2 0.2 0.2" visible="false" touch-rotation></a-entity>
-        <a-entity gltf-model="#jupiterAssetsItem" id="jupiterModel" position="0 0 -25" scale="0.025 0.025 0.025" visible="false" touch-rotation></a-entity>
-        <a-entity gltf-model="#mercuryAssetsItem" id="mercuryModel" position="0 0 -25" scale="0.4 0.4 0.4" visible="false" touch-rotation></a-entity>
-        <a-entity gltf-model="#moonAssetsItem" id="moonModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
-        <a-entity gltf-model="#neptuneAssetsItem" id="neptuneModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
-        <a-entity gltf-model="#saturnAssetsItem" id="saturnModel" position="0 0 -25" scale="0.05 0.05 0.05" visible="false" touch-rotation></a-entity>
-        <a-entity gltf-model="#unanusAssetsItem" id="unanusModel" position="0 0 -25" scale="0.1 0.1 0.1" visible="false" touch-rotation></a-entity>
-        <a-entity gltf-model="#venusAssetsItem" id="venusModel" position="0 0 -25" scale="0.3 0.3 0.3" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#earthAssetsItem" id="earthModel" position="0 0 -30" scale="0.1 0.1 0.1" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#jupiterAssetsItem" id="jupiterModel" position="0 0 -30" scale="0.1 0.1 0.1" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#mercuryAssetsItem" id="mercuryModel" position="0 0 -30" scale="0.1 0.1 0.1" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#moonAssetsItem" id="moonModel" position="0 0 -30" scale="0.1 0.1 0.1" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#neptuneAssetsItem" id="neptuneModel" position="0 0 -30" scale="0.1 0.1 0.1" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#saturnAssetsItem" id="saturnModel" position="0 0 -30" scale="0.1 0.1 0.1" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#unanusAssetsItem" id="unanusModel" position="0 0 -30" scale="0.1 0.1 0.1" visible="false" touch-rotation></a-entity>
+        <a-entity gltf-model="#venusAssetsItem" id="venusModel" position="0 0 -30" scale="0.1 0.1 0.1" visible="false" touch-rotation></a-entity>
 
         </a-scene>
         
